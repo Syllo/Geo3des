@@ -211,3 +211,19 @@ int V_IsZero(Vector v){
 int V_equals(Vector v1, Vector v2){
     return V_IsZero( V_substract(v1, v2) );
 }
+
+Vector V_rotate(Vector v, Vector centre, Vector v1, Vector v2){
+    double x, y, z;
+    Vector u_x_v1, u_y_v1, u_z_v1, u_x_v2, u_y_v2, u_z_v2;
+    u_z_v1 = V_unit(v1);
+    u_z_v2 = V_unit(v2);
+
+    V_uxUyFromUz(u_z_v1, &u_x_v1, &u_y_v1);
+    V_uxUyFromUz(u_z_v2, &u_x_v2, &u_y_v2);
+
+    Vector temp = V_substract(v, centre);
+    x = V_decompose(temp, u_x_v1);
+    y = V_decompose(temp, u_y_v1);
+    z = V_decompose(temp, u_z_v1);
+    return V_add(centre, V_recompose(x, y, z, u_x_v2, u_y_v2, u_z_v2));
+}

@@ -272,4 +272,14 @@ int V_IsZero(Vector v);
  */
 int V_equals(Vector v1, Vector v2);
 
+/** Effectur une rotation autour du centre "centre" en transformant le vecteur v1 en v2.
+ * \see Vector
+ * \param v Le vecteur sur lequel effectuer une rotation.
+ * \param centre Le centre durant la rotation.
+ * \param v1 Le vecteur de départ.
+ * \param v2 Le vecteur dont v1 doit correspondre à la fin.
+ * \return Le nouveau vecteur.
+ */
+Vector V_rotate(Vector v, Vector centre, Vector v1, Vector v2);
+
 #endif // __VECTOR_H__

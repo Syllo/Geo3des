@@ -113,17 +113,8 @@ void P_translate(Polygon *P, Vector trans){
 }
 
 void P_rotate(Polygon *P, Vector normal){
-    double x, y, z;
-    Vector u_x_poly, u_y_poly, u_x_normal, u_y_normal;
-    Vector normal_de_P = P_normal(P);
-
-    V_uxUyFromUz(normal_de_P, &u_x_poly, &u_y_poly);
-    V_uxUyFromUz(normal, &u_x_normal, &u_y_normal);
-
-    for(unsigned int i=0 ; i < P-> _nb_vertices; i++){
-        x = V_decompose(P-> _vertices[i], u_x_poly);
-        y = V_decompose(P-> _vertices[i], u_y_poly);
-        z = V_decompose(P-> _vertices[i], normal_de_P);
-        P-> _vertices[i] = V_recompose(x, y, z, u_x_normal, u_y_normal, normal);
-    }
+    Vector centre = P_center(P);
+    Vector normal_poly = P_normal(P);
+    for(unsigned int i=0; i < P-> _nb_vertices; i++)
+        P-> _vertices[i] = V_rotate(P-> _vertices[i], centre, normal_poly, normal);
 }
