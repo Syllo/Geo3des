@@ -26,7 +26,7 @@
 
 #include "Vector.h"
 
-Vector V_new(float x, float y, float z)
+Vector V_new(double x, double y, double z)
 {
     Vector v;
     v.x = x;
@@ -43,7 +43,7 @@ static inline int max(int a, int b){
     return a > b ? a : b;
 }
 
-static inline int zero(float a){
+static inline int zero(double a){
     return a < (0 + ERROR_RATIO) && a > (0 - ERROR_RATIO);
 }
 
@@ -79,34 +79,20 @@ double V_dot(Vector v1, Vector v2){
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
 
-double Det(Vector a, Vector b, Vector c){
-    return a.x*b.y*c.z + b.x*c.y*a.z + c.x*a.y*b.z - a.x*b.z*c.y - c.x*b.y*a.z - b.x*a.z*c.z;
-}
-
-int V_equals(Vector v1, Vector v2){
-    return V_IsZero( V_substract(v1, v2) );
-}
-
 int V_isOnTheRight(Vector M, Vector A, Vector B){
-    float det= Det(M, A, B);
+    double det;
     if( V_equals(A,B) )
         return -2;
+    det = Det(M, A, B);
     if(zero(det))
         return -1;
     return Det(M, A, B) > 0 ? false : true;
 }
 
-int V_isSurSegment(Vector p1, Vector p2, Vector d1){
-    if( V_equals(p1, p2) )
+int V_segmentsCoplanar(Vector p1, Vector p2, Vector q1, Vector q2){
+    if( V_equals(p1, p2) || V_equals(q1, q2) )
         return -1;
-    return zero(Det(p1, p2, d1)) &&
-        d1.x <= max(p1.x, p2.x) && d1.x >= min(p1.x, p2.x) &&
-        d1.y <= max(p1.y, p2.y) && d1.y >= min(p1.y, p2.y) &&
-        d1.z <= max(p1.z, p2.z) && d1.z >= min(p1.z, p2.z);
-}
 
-int V_segmentsCoplanar(Vector p1, Vector p2, Vector q1, Vector q2)
-{
     Vector p1p2 = V_substract(p2, p1);
     Vector q1q2 = V_substract(q2, q1);
     Vector p1q1 = V_substract(q1, p1);
@@ -114,14 +100,16 @@ int V_segmentsCoplanar(Vector p1, Vector p2, Vector q1, Vector q2)
 }
 
 int V_segmentsIntersect(Vector p1, Vector p2, Vector q1, Vector q2){
+    if( V_equals(p1, p2) || V_equals(q1, q2) )
+        return -1;
 
     if(!V_segmentsCoplanar(p1,p2,q1,q2))
         return false;
 
-    float detq1 = Det(p1, p2, q1);
-    float detq2 = Det(p1, p2, q2);
-    float detp1 = Det(q1, q2, p1);
-    float detp2 = Det(q1, q2, p2);
+    double detq1 = Det(p1, p2, q1);
+    double detq2 = Det(p1, p2, q2);
+    double detp1 = Det(q1, q2, p1);
+    double detp2 = Det(q1, q2, p2);
 
     if(zero(detq1) && V_isSurSegment(p1, p2, q1))
         return true;
@@ -141,8 +129,15 @@ int V_segmentsIntersect(Vector p1, Vector p2, Vector q1, Vector q2){
 int V_rayIntersectsSegment(Vector M, Vector u_ray, Vector p1, Vector p2){
     return 0;
 }
-// retourne 1 si la demie droite d'origine M et de direction u_ray
-// intersect le segment [p1p2]
+
+int V_isSurSegment(Vector p1, Vector p2, Vector d1){
+    if( V_equals(p1, p2) )
+        return -1;
+    return zero(Det(p1, p2, d1)) &&
+        d1.x <= max(p1.x, p2.x) && d1.x >= min(p1.x, p2.x) &&
+        d1.y <= max(p1.y, p2.y) && d1.y >= min(p1.y, p2.y) &&
+        d1.z <= max(p1.z, p2.z) && d1.z >= min(p1.z, p2.z);
+}
 
 double V_length(Vector v){
     return sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
@@ -167,6 +162,15 @@ Vector V_tournerAutourDeLAxeZ(Vector p, double radians){
             );
 }
 
+Vector V_ProjectOnPlane(Vector p, Vector normal){
+    Vector u_x, u_y;
+    double x, y;
+    V_uxUyFromUz(normal, &u_x, &u_y);
+    x = V_decompose(p, u_x);
+    x = V_decompose(p, u_y);
+    return V_recompose(x, y, 0., u_x, u_y, normal);
+}
+
 double V_decompose(Vector p, Vector u){
     return V_dot(p,u) * V_length(u);
 }
@@ -175,22 +179,35 @@ Vector V_recompose(double x, double y, double z, Vector u, Vector v, Vector w){
     return V_add(V_multiply(x,u), V_add(V_multiply(y,v), V_multiply(z,w)));
 }
 
-int V_IsZero(Vector v){
-    return zero(v.x) && zero(v.y) && zero(v.z);
-}
-
 void V_uxUyFromUz(Vector u_z, Vector* u_x, Vector* u_y){
     Vector y = V_new(0,1,0);
+    double size_uz = V_length(u_z);
     if(V_IsZero(V_cross(y,u_z))){
-        u_x->x = 1 * V_length(u_z);
+        if( u_z.y < 0 )
+            u_x->x = -1 * size_uz;
+        else
+            u_x->x = 1 * size_uz;
         u_x->y = 0;
         u_x->x = 0;
 
         u_y->x = 0;
         u_y->y = 0;
-        u_y->z = -1 * V_length(u_z);
+        u_y->z = -1 * size_uz;
     }
     else{
-
+        *u_x = V_multiply(size_uz, V_unit( V_cross(u_z, y) ));
+        *u_y = V_multiply(size_uz, V_unit(V_cross(u_z, *u_x)));
     }
+}
+
+double Det(Vector a, Vector b, Vector c){
+    return a.x*b.y*c.z + b.x*c.y*a.z + c.x*a.y*b.z - a.x*b.z*c.y - c.x*b.y*a.z - b.x*a.y*c.z;
+}
+
+int V_IsZero(Vector v){
+    return zero(v.x) && zero(v.y) && zero(v.z);
+}
+
+int V_equals(Vector v1, Vector v2){
+    return V_IsZero( V_substract(v1, v2) );
 }

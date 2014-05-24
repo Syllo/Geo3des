@@ -44,7 +44,7 @@ enum{
  */
 typedef struct
 {
-    float x,    /**< coordonnée sur l'axe des x */
+    double x,    /**< coordonnée sur l'axe des x */
           y,    /**< coordonnée sur l'axe des y */
           z;    /**< coordonnée sur l'axe des z */
 } Vector;
@@ -56,7 +56,7 @@ typedef struct
  * \return Un vecteur
  * \see Vector
  */
-Vector V_new(float x, float y, float z);
+Vector V_new(double x, double y, double z);
 
 /** Affiche le Vecteur et un message sur stderr.
  * \param v Le Vecteur à afficher
@@ -124,6 +124,19 @@ double V_dot(Vector v1, Vector v2);
  * \return Si A et B sont les mêmes -2 est retourné et si M se trouve sur AB -1 est retourné
  */
 int V_isOnTheRight(Vector M, Vector A, Vector B);
+
+/** Test si le segment formé par p1 et p2 ainsi que celui formé par q1 et q2 sont coplanaires.
+ * \param p1 Un Vecteur du premier segment.
+ * \param p2 Un Vecteur du premier segment.
+ * \param q1 Un Vecteur du deuxième segment.
+ * \param q2 Un Vecteur du deuxième segment.
+ * \see Vector
+ * \see true
+ * \see false
+ * \return Vrai (true) si les deux segments sont coplanaires.
+ * \return -1 est renvoyé si p1 et p2 ou q1 et q2 sont confondues.
+ */
+int V_segmentsCoplanar(Vector p1, Vector p2, Vector q1, Vector q2);
 
 /** Test si le segment formé par p1 et p2 croise celui formé par q1 et q2.
  * \param p1 Un Vecteur du premier segment.
