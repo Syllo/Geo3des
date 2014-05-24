@@ -1,4 +1,5 @@
 #include "Polygon.h"
+
 void P_init(Polygon *p){
     p->_nb_vertices = 0;
     p->_is_closed = 0;
@@ -75,6 +76,5 @@ int isConvex(Polygon *P){
         Vector v2 = V_unit(P->_vertices[i+1 % P->_nb_vertices]);
         Vector v3 = V_unit(P->_vertices[i+2 % P->_nb_vertices]);
         val = Det(v1, v2, v3);
-        
     }
 }
