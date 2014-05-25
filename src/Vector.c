@@ -195,8 +195,8 @@ void V_uxUyFromUz(Vector u_z, Vector* u_x, Vector* u_y){
         u_y->z = -1 * size_uz;
     }
     else{
-        *u_x = V_unit(V_multiply(-1, V_unit( V_cross(u_z, y) )));
-        *u_y = V_unit(V_multiply(1, V_unit(V_cross(u_z, *u_x))));
+        *u_x = V_unit(V_multiply(-1, V_cross(u_z, y) ));
+        *u_y = V_unit(V_multiply(1, V_cross(u_z, *u_x)));
     }
 }
 
