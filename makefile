@@ -12,7 +12,7 @@ vpath %.o $(OBJPATH)
 vpath %.h $(INCPATH)
 vpath extrusion $(BINPATH)
 
-extrusion : main.o Mesh.o Perlin.o Vector.o Polygon.o | bin
+extrusion : main.o Mesh.o Perlin.o Vector.o Polygon.o | $(BINPATH)
 	$(CC) -o $@ $(OBJPATH)main.o $(OBJPATH)Mesh.o $(OBJPATH)Perlin.o $(OBJPATH)Vector.o $(OBJPATH)Polygon.o $(LDFLAGS) $(DEBUGFLAGS)
 	mv $@ $(BINPATH)
 
