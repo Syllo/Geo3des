@@ -99,22 +99,22 @@ void M_revolution(Mesh *P, Polygon *p1, int nb_slices){
 
 
 void M_perlinExtrude(Mesh *QM, Polygon *p, int nb_slices){
-    Polygon a, b;
-    P_copy (p, & a);
-    P_copy (p, & b);
+    int i ;
+    Vector noise_p ;
+    Polygon plg ;
 
-    for (int i = 0; i < nb_slices; ++i)
+    for (i = 0; i < nb_slices; i++)
     {
-        Vector center = P_center (& b);
-        Vector noise = PRLN_vectorNoise (center);
-        P_translate (& b, noise);
-        P_rotate (& b, noise);
-        M_addSlice (QM, & a, & b);
-        P_copy (& b, & a);
+        noise_p = PRLN_vectorNoise( P_center( p ) ) ;
+        P_copy( p , &plg ) ;
+        P_translate( p , noise_p );
+        P_rotate( p , noise_p ) ;
+        M_addSlice( QM , &plg , p) ;
     }
 }
 
 static void Q_draw(Quad q){
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glBegin (GL_POLYGON);
 
     for (int i = 0; i < 4; ++i)
