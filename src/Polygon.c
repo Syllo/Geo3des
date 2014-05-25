@@ -1,3 +1,29 @@
+/**
+ * \file Polygon.c
+ * \brief Fichier des fonctions sur les polygones. (source)
+ * \author Maxime SCHMITT
+ * \author Arash HABIBI
+ * \date 2014
+ * \copyright GPL version 3 ou version ultérieur.
+ */
+
+/*
+   Copyright (C) 2014 Maxime SCHMITT, Arash HABIBI
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   */
+
 #include "Polygon.h"
 
 void P_init(Polygon *p){
@@ -47,7 +73,7 @@ void P_print(Polygon *P, char *message){
     }
 }
 
-int isConvex(Polygon *P){ ///////////// A FINIR
+int P_isConvex(Polygon *P){ ///////////// A FINIR
     double val = 1;
     for(int i=0; i < P->_nb_vertices && val; i++){
         Vector v1 = V_unit(P->_vertices[i]);
@@ -55,6 +81,7 @@ int isConvex(Polygon *P){ ///////////// A FINIR
         Vector v3 = V_unit(P->_vertices[i+2 % P->_nb_vertices]);
         val = Det(v1, v2, v3);
     }
+    return true;
 }
 
 int P_isOnTheLeftOfAllEdges(Polygon *P, Vector M){
@@ -67,11 +94,11 @@ int P_isOnTheLeftOfAllEdges(Polygon *P, Vector M){
 }
 
 int P_nbEdgesIntersectedByRay(Polygon *P, Vector M, Vector u_ray){ /////////// A FAIRE
-
+    return true;
 }
 
 int P_isInside(Polygon *P, Vector M){ /////////////////// A FAIRE
-
+    return true;
 }
 
 void  P_tournerAutourDeLAxeY(Polygon *P, double radians){

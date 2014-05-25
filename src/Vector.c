@@ -167,7 +167,7 @@ Vector V_ProjectOnPlane(Vector p, Vector normal){
     double x, y;
     V_uxUyFromUz(normal, &u_x, &u_y);
     x = V_decompose(p, u_x);
-    x = V_decompose(p, u_y);
+    y = V_decompose(p, u_y);
     return V_recompose(x, y, 0., u_x, u_y, normal);
 }
 

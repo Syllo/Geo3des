@@ -13,7 +13,7 @@
 
 #include "Vector.h"
 #include "Polygon.h"
-#include "QuadMesh.h"
+#include "Mesh.h"
 
 #define DIM2 0
 #define DIM3 1
@@ -80,7 +80,7 @@ void display()
 
     // Repere du monde
 
-    drawRepere();
+  //  drawRepere();
 
     glutSwapBuffers();
 }
@@ -129,8 +129,6 @@ void mouse(int button, int state, int x, int y)
 
 void idle()
 {
-    // animation du personnage ici
-
     glutPostRedisplay();
 }
 
@@ -149,7 +147,6 @@ int main(int argc, char *argv[])
     glClearColor(0,0,0,0);
 
     glutDisplayFunc(display);
-    //	glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(special);
     glutMouseFunc(mouse);
@@ -160,9 +157,9 @@ int main(int argc, char *argv[])
     p_light[2]=0.0;
     p_light[3]=1.0;
 
-    p_aim = V_new(0,0,-2.75);
-    P = P_new();
-    M = NULL;
+  //  p_aim = V_new(0,0,-2.75);
+  //  P = P_new();
+  //  M = NULL;
 
     glutMainLoop();
 
