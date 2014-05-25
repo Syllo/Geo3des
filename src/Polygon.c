@@ -73,7 +73,7 @@ void P_print(Polygon *P, char *message){
     }
 }
 
-int P_isConvex(Polygon *P){ ///////////// A FINIR
+int P_isConvex(Polygon *P){
     double val = 1;
     for(int i=0; i < P->_nb_vertices && val; i++){
         Vector v1 = V_unit(P->_vertices[i]);
@@ -93,11 +93,11 @@ int P_isOnTheLeftOfAllEdges(Polygon *P, Vector M){
     return result;
 }
 
-int P_nbEdgesIntersectedByRay(Polygon *P, Vector M, Vector u_ray){ /////////// A FAIRE
+int P_nbEdgesIntersectedByRay(Polygon *P, Vector M, Vector u_ray){
     return true;
 }
 
-int P_isInside(Polygon *P, Vector M){ /////////////////// A FAIRE
+int P_isInside(Polygon *P, Vector M){
     return true;
 }
 

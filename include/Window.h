@@ -15,6 +15,11 @@
 #define DIM2 0
 #define DIM3 1
 
+/** Initialise la fenêtre.
+ * \param argc Le nombre de string dans argv.
+ * \param argv Un pointeur contenant des chaines de caractère.
+ * \return Rien normalement.
+ */
 int InitWindow(int argc, char**argv);
 
 #endif // ( __WINDOW_H )

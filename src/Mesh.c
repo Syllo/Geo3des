@@ -75,9 +75,9 @@ void M_addSlice(Mesh *P, Polygon *p1, Polygon *p2){
             Quad q = Q_new
                 (
                  p1->_vertices[i],
-                 p1->_vertices[j],
                  p2->_vertices[i],
-                 p2->_vertices[j]
+                 p2->_vertices[j],
+                 p1->_vertices[j]
                 );
             M_addQuad (P, q);
         }

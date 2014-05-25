@@ -61,22 +61,22 @@ static void zoom_out(void){
         scale -= PAS_DE_SCALE;
 }
 
-static void initShade(){
-    GLfloat mat_diffuse[] = {1,1,1,1.0};
-    GLfloat mat_ambient[] = {0.1,0.1,0.1,0.0};
-
-    glClearColor (0.0, 0.0, 0.0, 0.0);
-    glShadeModel (GL_SMOOTH);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, mat_diffuse);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, mat_ambient);
-    glLightfv(GL_LIGHT0, GL_POSITION, p_light);
-
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_DEPTH_TEST);
-}
+//static void initShade(){
+//    GLfloat mat_diffuse[] = {1,1,1,1.0};
+//    GLfloat mat_ambient[] = {0.1,0.1,0.1,0.0};
+//
+//    glClearColor (0.0, 0.0, 0.0, 0.0);
+//    glShadeModel (GL_SMOOTH);
+//    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//
+//    glLightfv(GL_LIGHT0, GL_DIFFUSE, mat_diffuse);
+//    glLightfv(GL_LIGHT0, GL_AMBIENT, mat_ambient);
+//    glLightfv(GL_LIGHT0, GL_POSITION, p_light);
+//
+//    glEnable(GL_LIGHTING);
+//    glEnable(GL_LIGHT0);
+//    glEnable(GL_DEPTH_TEST);
+//}
 
 void display(){
     glEnable(GL_DEPTH_TEST);
