@@ -1,0 +1,5 @@
+make
+./bin/extrusion
+Créer des points avec le clic gauche
+clic droit pour extruder
+Utiliser les touches 2 4 6 8 pour des rotations et les flèches pour déplacement.
