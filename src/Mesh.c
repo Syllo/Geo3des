@@ -119,6 +119,7 @@ static void Q_draw(Quad q){
 
     for (int i = 0; i < 4; ++i)
     {
+        glColor3d(1.0/8*(i+4), 1.0/8*(i+4), 1.0/8*(i+4));
         Vector v = q. _vertices[i];
         glVertex3d (v.x, v.y, v.z);
     }

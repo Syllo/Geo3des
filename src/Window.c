@@ -178,7 +178,7 @@ static inline double yMouseToRealY(int y){
 }
 
 void mouse(int button, int state, int x, int y){
-    printf("Clic at %d %d \n",x,y);
+   // printf("Clic at %d %d \n",x,y);
 
     switch(button){
         case GLUT_LEFT_BUTTON:

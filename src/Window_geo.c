@@ -9,6 +9,7 @@ void window_geo_init(void){
     is_extruded = false;
     P_init(&poly);
     M_init(&mesh);
+    poly. _is_closed = true;
 }
 
 void window_geo_addPolyVertor (Vector v){
