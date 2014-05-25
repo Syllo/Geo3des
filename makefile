@@ -1,3 +1,4 @@
+DOCPATH = doc/
 SRCPATH = src/
 INCPATH = include/
 OBJPATH = obj/
@@ -28,6 +29,8 @@ main.o : main.c Mesh.h
 Window.o : Window.c Window.h Window_geo.h
 Window_geo.o : Window_geo.c Window_geo.h
 
+doc :
+	doxygen
 
 $(OBJPATH) :
 	mkdir $(OBJPATH)
@@ -37,5 +40,5 @@ $(BINPATH) :
 
 clean:
 	@echo Removing obj and bin directory ...;\
-		rm -r $(OBJPATH) $(BINPATH) 2>/dev/null;\
+		rm -r $(OBJPATH) $(BINPATH) $(DOCPATH) 2>/dev/null;\
 		echo Done.
