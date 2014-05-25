@@ -12,8 +12,8 @@ vpath %.o $(OBJPATH)
 vpath %.h $(INCPATH)
 vpath extrusion $(BINPATH)
 
-extrusion : main.o Mesh.o Perlin.o Vector.o Polygon.o | $(BINPATH)
-	$(CC) -o $@ $(OBJPATH)main.o $(OBJPATH)Mesh.o $(OBJPATH)Perlin.o $(OBJPATH)Vector.o $(OBJPATH)Polygon.o $(LDFLAGS) $(DEBUGFLAGS)
+extrusion : main.o Mesh.o Perlin.o Vector.o Polygon.o Window.o Window_geo.o | $(BINPATH)
+	$(CC) -o $@ $(OBJPATH)main.o $(OBJPATH)Mesh.o $(OBJPATH)Perlin.o $(OBJPATH)Vector.o $(OBJPATH)Polygon.o $(OBJPATH)Window.o $(OBJPATH)Window_geo.o $(LDFLAGS) $(DEBUGFLAGS)
 	mv $@ $(BINPATH)
 
 %.o : | $(OBJPATH)
@@ -25,6 +25,8 @@ Vector.o : Vector.c Vector.h
 Polygon.o : Polygon.c Polygon.h Vector.h
 Mesh.o : Mesh.c Mesh.h Polygon.h Vector.h Perlin.h
 main.o : main.c Mesh.h
+Window.o : Window.c Window.h Window_geo.h
+Window_geo.o : Window_geo.c Window_geo.h
 
 
 $(OBJPATH) :

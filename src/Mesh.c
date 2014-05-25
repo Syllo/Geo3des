@@ -35,7 +35,7 @@ Quad Q_new(Vector v1, Vector v2, Vector v3, Vector v4){
     return q;
 }
 
-static void M_init(Mesh *m){
+void M_init(Mesh *m){
     m-> _nb_quads = 0;
     m-> _is_filled = false;
 }
