@@ -68,7 +68,12 @@ typedef struct
     int _is_filled;             /**< Si le quadrilatère est plein. */
 } Mesh;
 
+/** Initialise à zero un maillage.
+ * \see Mesh
+ * \param m Le maillage.
+ */
 void M_init(Mesh *m);
+
 /** Crée un nouveau maillage
  * \see Mesh
  * \return Un maillage vide.

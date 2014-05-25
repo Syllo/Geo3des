@@ -1,5 +1,4 @@
 /**
- * \file Perlin.h
  * \brief Fichier de fonctions de bruit de Perlin. (header)
  * \author Maxime SCHMITT
  * \author Arash HABIBI

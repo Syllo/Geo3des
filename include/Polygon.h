@@ -89,6 +89,7 @@ void P_draw(Polygon *P);
 /** Affiche sur la sortie d'erreur (stderr) le polygone avec un message pour debuggage.
  * \see Polygon
  * \param P Le polygone.
+ * \param message Le message à afficher.
  */
 void P_print(Polygon *P, char *message);
 

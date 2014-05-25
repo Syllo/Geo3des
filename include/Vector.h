@@ -267,7 +267,8 @@ int V_IsZero(Vector v);
  * \see Vector
  * \see true
  * \see false
- * \param v Un Vecteur.
+ * \param v1 Un Vecteur.
+ * \param v2 Un Vecteur.
  * \return Vrai (true) si les vecteurs sont égaux et faux (false) sinon.
  */
 int V_equals(Vector v1, Vector v2);

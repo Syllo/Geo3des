@@ -1,3 +1,29 @@
+/**
+ * \file Window.c
+ * \brief Fichier de fenêtre utilisateur. (source)
+ * \author Maxime SCHMITT
+ * \author Arash HABIBI
+ * \date 2014
+ * \copyright GPL version 3 ou version ultérieur.
+ */
+
+/*
+   Copyright (C) 2014 Maxime SCHMITT, Arash HABIBI
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   */
+
 #include "Window.h"
 
 static int dim = DIM2;
@@ -78,7 +104,7 @@ static void zoom_out(void){
 //    glEnable(GL_DEPTH_TEST);
 //}
 
-void display(){
+static void display(){
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -107,7 +133,7 @@ void display(){
     glutSwapBuffers();
 }
 
-void keyboard(unsigned char keycode, int x, int y){
+static void keyboard(unsigned char keycode, int x, int y){
     // printf("Touche frapee : %c (code ascii %d)\n",keycode, keycode);
 
     switch(keycode){
@@ -136,7 +162,7 @@ void keyboard(unsigned char keycode, int x, int y){
     glutPostRedisplay();
 }
 
-void special(int keycode, int x, int y){
+static void special(int keycode, int x, int y){
     int mod = glutGetModifiers();
     switch(keycode)
     {
@@ -177,7 +203,7 @@ static inline double yMouseToRealY(int y){
     return - mouseToDouble(y, height);
 }
 
-void mouse(int button, int state, int x, int y){
+static void mouse(int button, int state, int x, int y){
    // printf("Clic at %d %d \n",x,y);
 
     switch(button){
@@ -205,7 +231,7 @@ void mouse(int button, int state, int x, int y){
     glutPostRedisplay();
 }
 
-void idle(){
+static void idle(){
     glutPostRedisplay();
 }
 
